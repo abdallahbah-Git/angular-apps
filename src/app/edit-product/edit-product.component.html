@@ -1,0 +1,64 @@
+<div class="container mt-3 col-md-6 offset-md-3">
+  <div class="card">
+    <div class="card-body">
+      <!-- {{productFormGroup.controls['price'].errors| json}} -->
+      <form [formGroup]="productFormGroup" (ngSubmit)="handleUpdateProduct()">
+        <div class="mb-3">
+          <label for="" class="form-group">ID: </label>
+          <label for="" class="form-group"> {{ product.id }} </label>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-group">Name</label>
+          <input type="text" class="form-control" formControlName="name" />
+          <small
+            *ngIf="
+              productFormGroup.controls['name'].errors;
+              $$: productFormGroup.controls['name'].touched
+            "
+            class="text-danger"
+          >
+            {{
+              productService.getErrorMessage(
+                "Name",
+                productFormGroup.controls["name"].errors
+              )
+            }}
+          </small>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-group">Price</label>
+          <input type="text" class="form-control" formControlName="price" />
+          <small
+            *ngIf="
+              productFormGroup.controls['price'].errors;
+              $$: productFormGroup.controls['price'].touched
+            "
+            class="text-danger"
+          >
+            {{
+              productService.getErrorMessage(
+                "Price",
+                productFormGroup.controls["price"].errors
+              )
+            }}
+          </small>
+        </div>
+        <div class="mb-3">
+          <label for="" class="form-group">Promotion</label>
+          <input
+            type="checkbox"
+            class="form-check-input m-1"
+            formControlName="promotion"
+          />
+        </div>
+        <button
+          [disabled]="productFormGroup.invalid"
+          class="btn btn-info"
+          type="submit"
+        >
+          Add
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
